@@ -148,7 +148,7 @@ void TemplateAlarmControlPanel::loop() {
         continue;
       }
 
-      switch(sensor_info.second.type) {
+      switch (sensor_info.second.type) {
         case ALARM_SENSOR_TYPE_INSTANT:
           instant_sensor_not_ready = true;
           break;
