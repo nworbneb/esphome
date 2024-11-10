@@ -122,19 +122,19 @@ void TemplateAlarmControlPanel::loop() {
 
 #ifdef USE_BINARY_SENSOR
   // Test all of the sensors in the list regardless of the alarm panel state
-    for (auto sensor_info : this->sensor_map_) {
-      // Check for chime zones
-      if ((sensor_info.second.flags & BINARY_SENSOR_MODE_CHIME)) {
-        // Look for the transition from closed to open
-        if ((!this->sensor_data_[sensor_info.second.store_index].last_chime_state) && (sensor_info.first->state)) {
-          // Must be disarmed to chime
-        if (this->current_state_ == ACP_STATE_DISARMED) {
-          this->chime_callback_.call();
-        }
+  for (auto sensor_info : this->sensor_map_) {
+    // Check for chime zones
+    if ((sensor_info.second.flags & BINARY_SENSOR_MODE_CHIME)) {
+      // Look for the transition from closed to open
+      if ((!this->sensor_data_[sensor_info.second.store_index].last_chime_state) && (sensor_info.first->state)) {
+        // Must be disarmed to chime
+      if (this->current_state_ == ACP_STATE_DISARMED) {
+        this->chime_callback_.call();
       }
-        // Record the sensor state change
-        this->sensor_data_[sensor_info.second.store_index].last_chime_state = sensor_info.first->state;
-      }
+    }
+      // Record the sensor state change
+      this->sensor_data_[sensor_info.second.store_index].last_chime_state = sensor_info.first->state;
+    }
     // Check for triggered sensors
     if (sensor_info.first->state) {  // Sensor triggered?
       // Skip if bypass armed home
