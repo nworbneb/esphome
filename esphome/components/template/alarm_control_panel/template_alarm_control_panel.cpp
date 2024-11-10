@@ -128,10 +128,10 @@ void TemplateAlarmControlPanel::loop() {
       // Look for the transition from closed to open
       if ((!this->sensor_data_[sensor_info.second.store_index].last_chime_state) && (sensor_info.first->state)) {
         // Must be disarmed to chime
-      if (this->current_state_ == ACP_STATE_DISARMED) {
-        this->chime_callback_.call();
+        if (this->current_state_ == ACP_STATE_DISARMED) {
+          this->chime_callback_.call();
+        }
       }
-    }
       // Record the sensor state change
       this->sensor_data_[sensor_info.second.store_index].last_chime_state = sensor_info.first->state;
     }
